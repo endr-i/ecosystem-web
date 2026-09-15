@@ -11,6 +11,15 @@ export type LoginRequest = {
   password: string;
 };
 
+export type ResetRequest = {
+  email: string;
+}
+
+export type ResetConfirmRequest = {
+  token: string;
+  password: string;
+}
+
 /** Body of `POST /api/auth/v1/register`. */
 export type RegisterRequest = {
   email: string;

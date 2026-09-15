@@ -6,13 +6,15 @@ import type {
   AuthUserResponse,
   LoginRequest,
   LoginResponse,
-  RegisterRequest,
+  RegisterRequest, ResetConfirmRequest, ResetRequest,
 } from '../types';
 
 export const authEndpoints = {
   login: '/api/auth/v1/login',
   register: '/api/auth/v1/register',
   logout: '/api/auth/v1/logout',
+  reset: '/api/auth/v1/reset',
+  resetConfirm: '/api/auth/v1/reset/confirm',
   me: '/api/auth/v1/me',
 } as const;
 
@@ -32,6 +34,14 @@ export async function login(payload: LoginRequest): Promise<AuthUser> {
   const user = toAuthUser(response.user);
   authStoreApi.setSession({ ...toTokenPair(response.tokens), user });
   return user;
+}
+
+export async function reset(payload: ResetRequest): Promise<void> {
+  await apiClient.post<void>(authEndpoints.reset, payload, { auth: false });
+}
+
+export async function resetConfirm(payload: ResetConfirmRequest): Promise<void> {
+  await apiClient.post<void>(authEndpoints.resetConfirm, payload, { auth: false });
 }
 
 export async function register(payload: RegisterRequest): Promise<string | null> {

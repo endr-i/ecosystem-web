@@ -7,6 +7,10 @@ import { RegisterPage } from '../features/auth/pages/RegisterPage';
 import { AccountsPage } from '../features/accounts/pages/AccountsPage';
 import { AccountDetailsPage } from '../features/accounts/pages/AccountDetailsPage';
 import { NotFoundPage } from '../shared/components/NotFoundPage';
+import { ResetPage } from '../features/auth/pages/ResetPage';
+import { ResetConfirmPage } from '../features/auth/pages/ResetConfirmPage';
+import { ResetPasswordSentPage } from '../features/auth/pages/ResetPasswordSentPage';
+import { ResetConfirmSuccessPage } from '../features/auth/pages/ResetConfirmSuccessPage.tsx';
 
 export function AppRouter() {
   return (
@@ -14,6 +18,10 @@ export function AppRouter() {
       <Route element={<GuestOnly />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forgot-password" element={<ResetPage />} />
+        <Route path="/forgot-password/sent" element={<ResetPasswordSentPage />} />
+        <Route path="/reset-password" element={<ResetConfirmPage />} />
+        <Route path="/reset-password/success" element={<ResetConfirmSuccessPage />} />
       </Route>
 
       <Route element={<RequireAuth />}>

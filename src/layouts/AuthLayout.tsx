@@ -3,13 +3,14 @@ import { Card, Flex, Typography } from 'antd';
 import { spacing } from '../theme/theme';
 
 type AuthLayoutProps = {
-  title: string;
+  title?: string;
   subtitle?: string;
   children: ReactNode;
   footer?: ReactNode;
+  mainTitle?: boolean;
 };
 
-export function AuthLayout({ title, subtitle, children, footer }: AuthLayoutProps) {
+export function AuthLayout({ title, subtitle, children, footer, mainTitle = true }: AuthLayoutProps) {
   return (
     <Flex
       align="center"
@@ -17,16 +18,20 @@ export function AuthLayout({ title, subtitle, children, footer }: AuthLayoutProp
       style={{ minHeight: '100vh', padding: spacing.lg, background: '#f5f6f8' }}
     >
       <Flex vertical gap={spacing.lg} style={{ width: '100%', maxWidth: 420 }}>
-        <Flex vertical align="center" gap={spacing.xs}>
-          <Typography.Title level={4} style={{ margin: 0 }}>
-            Ecosystem
-          </Typography.Title>
-        </Flex>
+        {mainTitle ? (
+          <Flex vertical align="center" gap={spacing.xs}>
+            <Typography.Title level={4} style={{ margin: 0 }}>
+              Ecosystem
+            </Typography.Title>
+          </Flex>
+        ) : null}
 
         <Card>
-          <Typography.Title level={3} style={{ marginTop: 0, marginBottom: subtitle ? spacing.xs : spacing.lg }}>
-            {title}
-          </Typography.Title>
+          {title ? (
+            <Typography.Title level={3} style={{ marginTop: 0, marginBottom: subtitle ? spacing.xs : spacing.lg }}>
+              {title}
+            </Typography.Title>
+          ) : null}
           {subtitle ? (
             <Typography.Paragraph type="secondary" style={{ marginBottom: spacing.lg }}>
               {subtitle}

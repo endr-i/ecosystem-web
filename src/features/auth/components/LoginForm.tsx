@@ -1,9 +1,11 @@
-import { App, Button, Form, Input } from 'antd';
+import { App, Button, Flex, Form, Input, Typography } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import { applyFormErrors } from '../../../shared/utils/formErrors';
 import { useLogin } from '../hooks/useLogin';
 import type { LoginRequest } from '../types';
+
+const { Link } = Typography;
 
 type LoginFormProps = {
   redirectTo: string;
@@ -40,6 +42,12 @@ export function LoginForm({ redirectTo }: LoginFormProps) {
       <Form.Item name="password" label="Password" rules={[{ required: true, message: 'Enter your password' }]}>
         <Input.Password prefix={<LockOutlined />} autoComplete="current-password" placeholder="Your password" />
       </Form.Item>
+
+      <Flex justify="flex-end" style={{ marginBottom: 20 }}>
+        <Link href="/forgot-password">
+          Forgot password?
+        </Link>
+      </Flex>
 
       <Form.Item style={{ marginBottom: 0 }}>
         <Button type="primary" htmlType="submit" block loading={isPending}>
